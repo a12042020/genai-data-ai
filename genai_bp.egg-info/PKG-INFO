@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: genai_bp
+Version: 0.1.2
+Summary: GenAI Blueprint - Application framework built on genai_tk
+Author-email: Thierry Caminel <thierry.caminel@atos.net>
+Project-URL: Homepage, https://github.com/tclatos/genai-blueprint
+Project-URL: Repository, https://github.com/tclatos/genai-blueprint
+Requires-Python: <3.13,>=3.12
+License-File: LICENSE
+Requires-Dist: genai_tk@ git+https://github.com/tclatos/genai-tk@main
+Requires-Dist: pydantic<3,>=2.7.0
+Requires-Dist: devtools>=0.12.2
+Requires-Dist: loguru>=0.7.3
+Requires-Dist: typer>=0.13.0
+Requires-Dist: omegaconf>=2.3.0
+Requires-Dist: fastapi[standard]>=0.115.6
+Requires-Dist: rich[jupyter]>=13.9.4
+Requires-Dist: universal-pathlib>=0.2.6
+Requires-Dist: pip>=25.1.1
+Requires-Dist: modal>=1.0.5
+Requires-Dist: python-dotenv>=1.1.1
+Requires-Dist: beartype>=0.21.0
+Requires-Dist: baml-py>=0.209.0
+Requires-Dist: kuzu>=0.11.2
+Dynamic: license-file

@@ -1,0 +1,3 @@
+[console_scripts]
+cli = genai_bp.main.cli:main
+mcp_math_server = genai_bp.mcp_server.math_server:main
