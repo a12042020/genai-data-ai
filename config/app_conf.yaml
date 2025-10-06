@@ -5,7 +5,7 @@
 # Default configuration, as defined in baseline.yaml, overrides.yaml, here, or elsewhere.
 # It can be overidden by 'BLUEPRINT_CONFIG' environment variable, or in code
 
-default_config: ${oc.env:BLUEPRINT_CONFIG,ekg_local}
+default_config: ${oc.env:BLUEPRINT_CONFIG,hackathon}
 
 # Note : configuration leverage OmegaConf solvers. See :
 # https://omegaconf.readthedocs.io/en/2.3_branch/usage.html#variable-interpolation
@@ -42,22 +42,11 @@ ui:
       - settings/configuration.py
       - settings/MCP_servers.py
 
-    training:
-        - training/runnable_playground.py
-        - training/CLI_runner.py
-        - training/tokenization.py
-        - training/embeddings.py
-
     demos:
-      - demos/maintenance_agent.py
-      - demos/mon_master.py
       - demos/deep_search_agent.py
       - demos/reAct_agent.py
       - demos/codeAct_agent.py
-      - demos/deep_agent.py
-      - demos/graph_RAG.py
-      - demos/anonymization.py
-      - demos/cognee_KG.py
+
 
 
 

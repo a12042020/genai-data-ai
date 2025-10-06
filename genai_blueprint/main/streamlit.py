@@ -27,27 +27,31 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 # Authentication handling
-auth_config = load_auth_config()
+try:
+    auth_config = load_auth_config()
 
-# Only show login form if authentication is enabled and user is not authenticated
-if auth_config.enabled and not st.session_state.authenticated:
-    st.title("Login")
+    # Only show login form if authentication is enabled and user is not authenticated
+    if auth_config.enabled and not st.session_state.authenticated:
+        st.title("Login")
 
-    with st.form("login_form"):
-        username = st.text_input("Username")
-        password = st.text_input("Password", type="password")
-        submit = st.form_submit_button("Login")
+        with st.form("login_form"):
+            username = st.text_input("Username")
+            password = st.text_input("Password", type="password")
+            submit = st.form_submit_button("Login")
 
-        if submit:
-            if authenticate(username, password):
-                st.session_state.authenticated = True
-                st.success("Login successful!")
-                st.rerun()
-            else:
-                st.error("Invalid username or password")
+            if submit:
+                if authenticate(username, password):
+                    st.session_state.authenticated = True
+                    st.success("Login successful!")
+                    st.rerun()
+                else:
+                    st.error("Invalid username or password")
 
-    # Stop execution if not authenticated
-    st.stop()
+        # Stop execution if not authenticated
+        st.stop()
+except Exception as ex:
+    st.error(f"error during authentication: {ex}")
+    #st.stop()
 
 # Only show the main application if authenticated
 LOGO = "New Atos logo white.png"
