@@ -8,9 +8,9 @@ import asyncio
 
 from loguru import logger
 
-from genai_blueprint.demos.ekg.baml_client import b as baml_sync_client
-from genai_blueprint.demos.ekg.baml_client.async_client import b as baml_async_client
-from genai_blueprint.demos.ekg.cli_commands.commands_baml import BamlStructuredProcessor
+from genai_blueprint.hackathon.baml_client import b as baml_sync_client
+from genai_blueprint.hackathon.baml_client.async_client import b as baml_async_client
+from genai_blueprint.hackathon.cli_commands.commands_baml import BamlStructuredProcessor
 
 # Sample rainbow document content from the BAML test
 SAMPLE_RAINBOW_CONTENT = """# Solution Review Slides

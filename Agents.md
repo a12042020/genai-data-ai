@@ -209,7 +209,7 @@ agent.tools.extend(get_maintenance_tools())
 
 ### Knowledge Graph Integration
 ```python
-from genai_blueprint.demos.ekg.graph_core import EKGGraphCore
+from genai_blueprint.hackathon.graph_core import EKGGraphCore
 from genai_tk.extra.cognee_utils import CogneeUtils
 
 # Initialize knowledge graph
