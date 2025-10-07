@@ -125,7 +125,7 @@ class SubcontractingRisk {
   flowDownClauses string @description("Clauses de répercussion")
 }
 
- class ContactLegalAnalysis { 
+ class LegalContractAnalysis { 
     id string @description("Identifiant unique de l'analyse") 
     documentTitle string @description("Titre du document analysé") 
     documentType string @description("Type de document (contrat, CGU, etc.)") 
@@ -146,11 +146,14 @@ class SubcontractingRisk {
     subcontractingRisk SubcontractingRisk? @description("Détails des risques de sous-traitance") 
  }
 
-function AnalyseLegalContract(document: string) -> ContactLegalAnalysis {
+function ExtractFromDocument(document: string) -> LegalContractAnalysis {
   client "GptOss120" 
   prompt #"
     Extract from this content:
     {{ document }}
+
+    Take attention to ....;  
+    If  .. then study
 
     {{ ctx.output_format }}
     JSON:
