@@ -21,7 +21,7 @@ hackathon :
     - genai_blueprint.hackathon.cli_commands.commands_baml:register_baml_commands
 
   paths:
-    team_sp: ${oc.env:ONEDRIVE, undefined_path}/Team Hackathon DATA&AI - Team Data AI Kackathon
+    team_sp: ${oc.env:ONEDRIVE, undefined_path}/Team Hackathon DATA&AI - Team Data AI Hackathon
     hackathon_sp: ${oc.env:ONEDRIVE, undefined_path}/Hackathon Legal & Compliance - Général
 
   # TODO : Allow 'default' and tagged kv_store

@@ -1,5 +1,5 @@
 from json import tool
-from hackathon.baml_client.types import LegalContractAnalysis
+from hackathon.baml_client.types import ExtractedContractInformation
 
 
 store = PydanticStore()

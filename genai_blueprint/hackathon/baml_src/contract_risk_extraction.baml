@@ -125,7 +125,7 @@ class SubcontractingRisk {
   flowDownClauses string @description("Clauses de répercussion")
 }
 
- class LegalContractAnalysis { 
+ class ExtractedContractInformation { 
     id string @description("Identifiant unique de l'analyse") 
     documentTitle string @description("Titre du document analysé") 
     documentType string @description("Type de document (contrat, CGU, etc.)") 
@@ -146,20 +146,8 @@ class SubcontractingRisk {
     subcontractingRisk SubcontractingRisk? @description("Détails des risques de sous-traitance") 
  }
 
-function ExtractFromDocument(document: string) -> LegalContractAnalysis {
-  client "GptOss120" 
-  prompt #"
-    Extract from this content:
-    {{ document }}
 
-    Take attention to ....;  
-    If  .. then study
-
-    {{ ctx.output_format }}
-    JSON:
-  "#
-}
-function AnalyseLegalContract (document: string) -> LegalContractAnalysis {
+function ExtractLegalContract (document: string) -> ExtractedContractInformation {
   client "GptOss120" 
   prompt #"
     Analyse the following contract and extract information related to legal risks.
@@ -172,7 +160,7 @@ function AnalyseLegalContract (document: string) -> LegalContractAnalysis {
   "#
 }
 
-function CreateFakeRiskAnalysys(instruction: string) -> LegalContractAnalysis {
+function CreateFakeRiskAnalysys(instruction: string) -> ExtractedContractInformation {
   client "GptOss120" 
   prompt #"
     Generage a fake Risk Analysis for a contrat, with these instructiond:
@@ -192,7 +180,7 @@ test fake {
 }
 
 test test_analyse {
-  functions [AnalyseLegalContract]
+  functions [ExtractLegalContract]
   args { 
     document #"
 Service Agreement
