@@ -159,6 +159,37 @@ function ExtractFromDocument(document: string) -> LegalContractAnalysis {
     JSON:
   "#
 }
+function AnalyseLegalContract (document: string) -> LegalContractAnalysis {
+  client "GptOss120" 
+  prompt #"
+    Analyse the following contract and extract information related to legal risks.
+    Document:
+    {{ document }}
+
+    Follow that format:
+    {{ ctx.output_format }}
+    JSON:
+  "#
+}
+
+function CreateFakeRiskAnalysys(instruction: string) -> LegalContractAnalysis {
+  client "GptOss120" 
+  prompt #"
+    Generage a fake Risk Analysis for a contrat, with these instructiond:
+    {{ instruction }}
+
+    Follow that format:
+    {{ ctx.output_format }}
+    JSON:
+  "#
+}
+
+test fake {
+  functions [CreateFakeRiskAnalysys]
+  args {
+    instruction "Fourniture de prestation de conseil"
+  }
+}
 
 test test_analyse {
   functions [AnalyseLegalContract]
