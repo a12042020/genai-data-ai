@@ -1,5 +1,5 @@
 ################
-# Application configuration file 
+# Application configuration file
 ################
 
 # Default configuration, as defined in baseline.yaml, overrides.yaml, here, or elsewhere.
@@ -11,14 +11,14 @@ default_config: ${oc.env:BLUEPRINT_CONFIG,hackathon}
 # https://omegaconf.readthedocs.io/en/2.3_branch/usage.html#variable-interpolation
 
 paths:
-  data_root : ${oc.env:HOME}
-  project : ${oc.env:PWD}
+  data_root: ${oc.env:HOME}
+  project: ${oc.env:PWD}
   src: ${paths.project}/genai_blueprint
   config: ${paths.project}/config
   demo_conf: ${paths.project}/config/demos
   models: ${oc.env:HOME}/.models
   postgres: postgresql://${oc.env:POSTGRES_USER,unknown_user}:${oc.env:POSTGRES_PASSWORD,password}@localhost:5432/ekg
-  datasets : ${paths.project}/use_case_data
+  datasets: ${paths.project}/use_case_data
 
 # Other config files merged to this one at launch time
 merge:
@@ -27,16 +27,13 @@ merge:
   - ${paths.config}/mcp_servers.yaml
   - ${paths.config}/components/gpt_researcher.yaml
 
-
-
-#### 
-# User Interface Configuration : list of Streamlit pages, authentication, ... 
-####    
+####
+# User Interface Configuration : list of Streamlit pages, authentication, ...
+####
 ui:
-  app_name : GenAI Lab and Practicum
-  pages_dir : ${paths.src}/webapp/pages
+  app_name: Hackathon AI & GenAI
+  pages_dir: ${paths.src}/webapp/pages
   navigation:
-
     settings:
       - settings/welcome.py
       - settings/configuration.py
@@ -46,13 +43,11 @@ ui:
       - demos/deep_search_agent.py
       - demos/reAct_agent.py
       - demos/codeAct_agent.py
+      - demos/legal_assistant_agent.py
 
-
-
-
-#### 
+####
 # Authentication
-####  
+####
 auth:
   enabled: ${oc.env:BASIC_AUTH_ENABLED,false}
   config_file: ${paths.config}/basic_auth.yaml
@@ -61,7 +56,7 @@ auth:
 # Command Line Interface configuration
 ####
 cli:
-  commands:  # List modules:functions to register CLI commands
+  commands: # List modules:functions to register CLI commands
     - genai_tk.main.commands_core:register_commands
     - genai_tk.main.commands_agents:register_commands
     - genai_tk.main.commands_extra:register_commands
@@ -69,9 +64,8 @@ cli:
 #     - genai_tk.extra.cli_commands_agents:register_commands
 #     - genai_blueprint.webapp.cli_commands:register_commands
 #     - genai_blueprint.main.cli:register_commands
- 
+
 logging:
   format: "<cyan>{time:HH:mm:ss}</cyan>-<level>{level: <7}</level> | <magenta>{file.name}</magenta>:<green>{line} <italic>{function}</italic></green>- <level>{message}</level>"
   level: INFO
-  backtrace : True  # Should be False in production  - see https://loguru.readthedocs.io/en/stable/overview.html#fully-descriptive-exceptions
-  
+  backtrace: True # Should be False in production  - see https://loguru.readthedocs.io/en/stable/overview.html#fully-descriptive-exceptions
