@@ -8,5 +8,5 @@ store.get("")
 c = AnalyseLegalContract
 
 @tool
-def analyse_legal_contract(doc: str) 
+def analyse_legal_contract(doc: str) -> str:
 

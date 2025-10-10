@@ -3,13 +3,15 @@ Legal Assistant Agent Demo - Main Application
 """
 
 import streamlit as st
-from genai_blueprint.webapp.pages.demos.hackathon.config.settings import PAGE_CONFIG, SUPPORTED_FILE_TYPES
+
 from genai_blueprint.webapp.pages.demos.hackathon.components.document_processor import (
     process_document,
-    render_original_document,
+    render_contract_summary,
     render_extracted_information,
-    render_contract_summary
+    render_original_document,
 )
+from genai_blueprint.webapp.pages.demos.hackathon.config.settings import PAGE_CONFIG, SUPPORTED_FILE_TYPES
+
 
 def initialize_session_state() -> None:
     """Initialize all session state variables."""
@@ -38,8 +40,61 @@ def main() -> None:
     # Initialize session state
     initialize_session_state()
 
-    # Render sidebar
-    #render_sidebar()
+    # Sidebar with cache controls
+    with st.sidebar:
+        st.header("🛠️ Cache Controls")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("🧹 Clear Cache", help="Clear all cached results"):
+                st.cache_data.clear()
+                st.cache_resource.clear()
+                # Clear session state
+                for key in ['ocr_complete', 'markdown_content', 'extracted_info', 'resumed_content', 'kcp_analysis']:
+                    if key in st.session_state:
+                        del st.session_state[key]
+                st.success("All caches cleared!")
+        
+        with col2:
+            if st.button("🔄 Force Refresh", help="Force refresh current document"):
+                # Clear session state for current document
+                for key in ['ocr_complete', 'markdown_content', 'extracted_info', 'resumed_content', 'kcp_analysis']:
+                    if key in st.session_state:
+                        del st.session_state[key]
+                st.success("Document refreshed!")
+        
+        # Show current cache status
+        st.subheader("📊 Cache Status")
+        
+        # Count cached items
+        cache_count = 0
+        cache_items = []
+        
+        if st.session_state.get('ocr_complete'):
+            cache_count += 1
+            cache_items.append("✓ OCR Result")
+        
+        if st.session_state.get('extracted_info'):
+            cache_count += 1
+            cache_items.append("✓ Legal Extraction")
+            
+        if st.session_state.get('resumed_content'):
+            cache_count += 1
+            cache_items.append("✓ Contract Summary")
+            
+        if st.session_state.get('kcp_analysis'):
+            cache_count += 1
+            cache_items.append("✓ KCP Analysis")
+        
+        st.metric("Cached Results", cache_count)
+        
+        if cache_items:
+            st.success("\n".join(cache_items))
+        else:
+            st.info("No cached results yet")
+        
+        # Show benefits
+        st.info("📋 **Cache Benefits:**\n- OCR: Instant reload\n- Analysis: Skip API calls\n- Cost: Reduced tokens")
 
     # Main content
     st.title("⚖️ Lawlytics")

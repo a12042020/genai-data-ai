@@ -2,8 +2,10 @@
 OCR processing with Mistral API
 """
 import base64
+
 from mistralai import Mistral
-from genai_blueprint.webapp.pages.demos.hackathon.config.settings import MISTRAL_API_KEY, MIME_TYPES, OCR_MODEL
+
+from genai_blueprint.webapp.pages.demos.hackathon.config.settings import MIME_TYPES, MISTRAL_API_KEY, OCR_MODEL
 
 
 def process_with_mistral_ocr(file_bytes: bytes, file_type: str) -> str:

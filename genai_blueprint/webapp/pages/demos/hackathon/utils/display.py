@@ -2,7 +2,9 @@
 Display utilities for Streamlit UI
 """
 import base64
+
 import streamlit as st
+
 from genai_blueprint.webapp.pages.demos.hackathon.config.settings import SCROLL_HEIGHT
 
 
